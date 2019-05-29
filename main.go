@@ -2,14 +2,27 @@ package main
 
 import (
   "net/http"
-  // "github.com/google/go-jsonnet"
+  "log"
+  "os"
 )
 
+type Server struct {
+  mux *http.ServeMux
+}
+
+func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	s.mux.ServeHTTP(w, r)
+}
+
 func main() {
-  out , err := execJsonnetCode("{ x: 5, y: self.x,, }")
-  if err != nil {
-    println(err.Error())
+  server := &Server{
+    mux: http.NewServeMux(),
   }
 
-  println(out)
+  port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+  }
+
+  log.Fatalf("Error listening on :%v: %v", port, http.ListenAndServe(":"+port, server))
 }
