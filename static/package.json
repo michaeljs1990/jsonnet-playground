@@ -1,0 +1,9 @@
+{
+  "name": "jsonnet-playground",
+  "version": "1.0.0",
+  "description": "A frontend for the jsonnet playground",
+  "dependencies": {
+    "codemirror-mode-jsonnet": "^1.0.0",
+    "package.json": "^2.0.1"
+  }
+}
