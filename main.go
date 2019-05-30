@@ -10,7 +10,7 @@ type Server struct {
   mux *http.ServeMux
 }
 
-func (s *Server) Init() {
+func (s *Server) Register() {
   s.mux.HandleFunc("/backend", s.HandleEdit)
 
   // Catch all for serving up static assets
@@ -26,7 +26,7 @@ func main() {
     mux: http.NewServeMux(),
   }
 
-  server.Init()
+  server.Register()
 
   port := os.Getenv("PORT")
 	if port == "" {
