@@ -1,4 +1,6 @@
 html, body {
+  color: white;
+  background-color: #0064bd;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -13,8 +15,11 @@ html, body {
   flex-grow: 1;
 }
 
+.CodeMirror:first-of-type {
+  border-right: 2px solid #0064bd;
+}
+
 .CodeMirror {
   height: 100%;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-radius: 4px;
 }
