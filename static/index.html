@@ -1,2 +1,48 @@
+<!doctype html>
 <html>
+
+<head>
+  <title>Jsonnet Playground</title>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <script src="node_modules/codemirror/lib/codemirror.js"></script>
+  <script src="node_modules/codemirror/lib/codemirror.js"></script>
+  <script src="node_modules/codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="node_modules/codemirror-mode-jsonnet/jsonnet.js"></script>
+</head>
+
+<body>
+  <h2>Jsonnet Playground</h2>
+  <div class="editor">
+<textarea id="jsonnet-code" name="jsonnet-code">
+local first = "hello";
+
+{
+  second: "world",
+  out: "%s %s!" % [first, this.second],
+}</textarea>
+<textarea id="javascript-code" name="javascript-code">
+{
+  "second": "world",
+  "out": "hello world!"
+}
+</textarea>
+  </div>
+  
+  <script>
+  CodeMirror.fromTextArea(document.getElementById("jsonnet-code"), {
+    mode: {name: "jsonnet"},
+    lineNumbers: true,
+    indentUnit: 2,
+    matchBrackets: true
+  });
+  CodeMirror.fromTextArea(document.getElementById("javascript-code"), {
+    lineNumbers: true,
+    indentUnit: 2,
+    matchBrackets: true
+  });
+  </script>
+</body>
+
 </html>

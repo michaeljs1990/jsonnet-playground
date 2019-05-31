@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A frontend for the jsonnet playground",
   "dependencies": {
+    "codemirror": "^5.47.0",
     "codemirror-mode-jsonnet": "^1.0.0"
   }
 }

@@ -1,0 +1,20 @@
+html, body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.editor {
+  display: flex;
+  flex: 1;
+}
+
+.editor .CodeMirror {
+  flex-grow: 1;
+}
+
+.CodeMirror {
+  height: 100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
