@@ -1,6 +1,11 @@
 html, body {
-  color: white;
   background-color: #0064bd;
+  color: white;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.container {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -12,6 +17,7 @@ html, body {
 }
 
 .editor .CodeMirror {
+  flex-basis: 0;
   flex-grow: 1;
 }
 
@@ -22,4 +28,8 @@ html, body {
 .CodeMirror {
   height: 100%;
   border-radius: 4px;
+}
+
+.title {
+  margin: 8px;
 }

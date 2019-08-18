@@ -7,47 +7,73 @@
   <link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
   <link rel="stylesheet" href="css/custom.css">
   <script src="node_modules/codemirror/lib/codemirror.js"></script>
-  <script src="node_modules/codemirror/lib/codemirror.js"></script>
   <script src="node_modules/codemirror/addon/edit/matchbrackets.js"></script>
   <script src="node_modules/codemirror-mode-jsonnet/jsonnet.js"></script>
 </head>
 
 <body>
-  <div>
-    <h2>Jsonnet Playground</h2>
-    <button>Run</button>
-    <button>Share</button>
-    <button>About</button>
-  </div>
-  <div class="editor">
+  <div class="container">
+    <div class="title">
+      <h2>Jsonnet Playground</h2>
+      <button class="buttons" id="run-btn">Run</button>
+      <button class="buttons" id="share-btn">Share</button>
+      <button class="buttons" id="about-btn">About</button>
+    </div>
+    <div class="editor">
 <textarea id="jsonnet-code" name="jsonnet-code">
 local first = "hello";
 
 {
   second: "world",
-  out: "%s %s!" % [first, this.second],
+  out: "%s %s!" % [first, self.second],
 }</textarea>
 <textarea id="javascript-code" name="javascript-code">
 {
-  "second": "world",
-  "out": "hello world!"
+   "out": "hello world!",
+   "second": "world"
 }
 </textarea>
+    </div>
   </div>
   
-  <script>
-  CodeMirror.fromTextArea(document.getElementById("jsonnet-code"), {
+<script>
+  // Register JS needed to colorize our jsonnet code
+  var editor = CodeMirror.fromTextArea(document.getElementById("jsonnet-code"), {
     mode: {name: "jsonnet"},
     lineNumbers: true,
     indentUnit: 2,
     matchBrackets: true
   });
-  CodeMirror.fromTextArea(document.getElementById("javascript-code"), {
+  var render = CodeMirror.fromTextArea(document.getElementById("javascript-code"), {
     lineNumbers: true,
     indentUnit: 2,
-    matchBrackets: true
+    matchBrackets: true,
+    readonly: "nocursor"
   });
-  </script>
+  
+  // Setup AJAX requests on buttons
+  var compile  = function() {
+    var formData = new FormData();
+    formData.append("jsonnet", editor.getValue());
+  
+    xhr = new XMLHttpRequest();
+    xhr.open('POST', '/backend/compile');
+  
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        render.setValue(xhr.responseText);
+      } else if (xhr.status !== 200) {
+        console.log('Request failed with error: ' + xhr.responseText);
+      }
+    };
+  
+    xhr.send(formData);
+  }
+  
+  // Setup event listeners
+  var run = document.getElementById("run-btn");
+  run.addEventListener("click", compile);
+</script>
 </body>
 
 </html>
