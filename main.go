@@ -14,9 +14,8 @@ func main() {
 	}
 
 	server := &http.Server{
-		Addr:         ":" + port,
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 10 * time.Second,
+		Handler: http.TimeoutHandler(http.DefaultServeMux, 7*time.Second, ""),
+		Addr:    ":" + port,
 	}
 
 	http.HandleFunc("/backend/compile", HandleCompile)
