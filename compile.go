@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/google/go-jsonnet"
 )
 
-func (s *Server) HandleCompile(w http.ResponseWriter, r *http.Request) {
-
+func HandleCompile(w http.ResponseWriter, r *http.Request) {
+	time.Sleep(15 * time.Second)
 	// Use MB of memory before paging out to disk
 	if err := r.ParseMultipartForm(1000000); err != nil {
 		fmt.Fprintf(w, "Unable to parse form: %v", err)
