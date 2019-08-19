@@ -7,10 +7,19 @@ import (
 	"time"
 )
 
+var (
+	store PersistJsonnet
+)
+
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
+	}
+
+	// Add in toggle for the different types of backends
+	store = InMemory{
+		store: map[string]string{},
 	}
 
 	server := &http.Server{
