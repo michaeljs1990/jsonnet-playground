@@ -3,9 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"time"
-
-	"github.com/google/go-jsonnet"
 )
 
 func HandleShare(w http.ResponseWriter, r *http.Request) {
