@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var editTemplate = template.Must(template.ParseFiles("index.html"))
+var editTemplate = template.Must(template.ParseFiles("static/index.html"))
 
 // Example Jsonnet to show people on first visit
 const defaultJsonnet = `local first = "hello";
