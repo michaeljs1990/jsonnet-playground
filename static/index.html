@@ -35,7 +35,7 @@ local first = "hello";
 </textarea>
     </div>
   </div>
-  
+
 <script>
   // Register JS needed to colorize our jsonnet code
   var editor = CodeMirror.fromTextArea(document.getElementById("jsonnet-code"), {
@@ -50,15 +50,15 @@ local first = "hello";
     matchBrackets: true,
     readonly: "nocursor"
   });
-  
+
   // Setup AJAX requests on buttons
-  var compile  = function() {
+  var compile = function() {
     var formData = new FormData();
     formData.append("jsonnet", editor.getValue());
-  
+
     xhr = new XMLHttpRequest();
     xhr.open('POST', '/backend/compile');
-  
+
     xhr.onload = function() {
       if (xhr.status === 200) {
         render.setValue(xhr.responseText);
@@ -66,13 +66,35 @@ local first = "hello";
         console.log('Request failed with error: ' + xhr.responseText);
       }
     };
-  
+
     xhr.send(formData);
-  }
-  
+  };
+
+  var store = function() {
+    var formData = new FormData();
+    formData.append("jsonnet", editor.getValue());
+
+    xhr = new XMLHttpRequest();
+    xhr.open('POST', '/backend/share');
+
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        console.log("share link: " + xhr.responseText);
+        render.setValue(xhr.responseText);
+      } else if (xhr.status !== 200) {
+        console.log('Request failed with error: ' + xhr.responseText);
+      }
+    };
+
+    xhr.send(formData);
+  };
+
   // Setup event listeners
   var run = document.getElementById("run-btn");
   run.addEventListener("click", compile);
+
+  var share = document.getElementById("share-btn");
+  share.addEventListener("click", store);
 </script>
 </body>
 
