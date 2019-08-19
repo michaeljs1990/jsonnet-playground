@@ -18,6 +18,7 @@ func main() {
 		Addr:    ":" + port,
 	}
 
+	http.HandleFunc("/backend/share", HandleShare)
 	http.HandleFunc("/backend/compile", HandleCompile)
 	http.Handle("/", http.FileServer(http.Dir("./static")))
 
