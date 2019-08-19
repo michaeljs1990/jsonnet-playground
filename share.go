@@ -33,5 +33,6 @@ func HandleShare(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Unable to store code: %v", err)
 	}
 
-	fmt.Fprintf(w, id)
+	fid := fmt.Sprintf("%s/j/%s", r.Host, id)
+	fmt.Fprintf(w, fid)
 }

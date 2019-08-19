@@ -4,11 +4,12 @@
 <head>
   <title>Jsonnet Playground</title>
   <meta charset="utf-8"/>
-  <link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
-  <link rel="stylesheet" href="css/custom.css">
-  <script src="node_modules/codemirror/lib/codemirror.js"></script>
-  <script src="node_modules/codemirror/addon/edit/matchbrackets.js"></script>
-  <script src="node_modules/codemirror-mode-jsonnet/jsonnet.js"></script>
+  <link rel="shortcut icon" type="image/png" href="/static/favicon.png"/>
+  <link rel="stylesheet" href="/static/node_modules/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="/static/css/custom.css">
+  <script src="/static/node_modules/codemirror/lib/codemirror.js"></script>
+  <script src="/static/node_modules/codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="/static/node_modules/codemirror-mode-jsonnet/jsonnet.js"></script>
 </head>
 
 <body>
@@ -21,19 +22,8 @@
       <a id="share-link"></a>
     </div>
     <div class="editor">
-<textarea id="jsonnet-code" name="jsonnet-code">
-local first = "hello";
-
-{
-  second: "world",
-  out: "%s %s!" % [first, self.second],
-}</textarea>
-<textarea id="javascript-code" name="javascript-code">
-{
-   "out": "hello world!",
-   "second": "world"
-}
-</textarea>
+      <textarea id="jsonnet-code" name="jsonnet-code">{{printf "%s" .Code}}</textarea>
+      <textarea id="javascript-code" name="javascript-code"></textarea>
     </div>
   </div>
 

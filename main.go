@@ -27,9 +27,12 @@ func main() {
 		Addr:    ":" + port,
 	}
 
+	http.HandleFunc("/", HandleEditor)
 	http.HandleFunc("/backend/share", HandleShare)
 	http.HandleFunc("/backend/compile", HandleCompile)
-	http.Handle("/", http.FileServer(http.Dir("./static")))
+
+	fileServer := http.FileServer(http.Dir("static"))
+	http.Handle("/static/", http.StripPrefix("/static/", fileServer))
 
 	log.Fatalf("Error listening on :%v: %v", port, server.ListenAndServe())
 }
