@@ -5,6 +5,10 @@ html, body {
   margin: 0 auto;
 }
 
+#share-link {
+  float: right;
+}
+
 .container {
   display: flex;
   flex-direction: column;

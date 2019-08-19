@@ -18,6 +18,7 @@
       <button class="buttons" id="run-btn">Run</button>
       <button class="buttons" id="share-btn">Share</button>
       <button class="buttons" id="about-btn">About</button>
+      <a id="share-link"></a>
     </div>
     <div class="editor">
 <textarea id="jsonnet-code" name="jsonnet-code">
@@ -80,7 +81,7 @@ local first = "hello";
     xhr.onload = function() {
       if (xhr.status === 200) {
         console.log("share link: " + xhr.responseText);
-        render.setValue(xhr.responseText);
+        document.getElementById("share-link").innerHTML = xhr.responseText;
       } else if (xhr.status !== 200) {
         console.log('Request failed with error: ' + xhr.responseText);
       }
