@@ -7,6 +7,12 @@ similar features. This very much has the minimum amount of code
 to get things working but lacks persistent stoage currently for
 code snippets.
 
+### Demo Site
+
+This site will not be staying around forever as I look to move the
+playground to some other place. For now you can test things out at
+https://jsonnet.xrt0x.com/ though.
+
 ### Dockerfile
 
 A dockerfile is included that can be built as you would any other
