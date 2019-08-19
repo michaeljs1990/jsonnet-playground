@@ -9,14 +9,12 @@ import (
 )
 
 func HandleCompile(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(15 * time.Second)
 	// Use MB of memory before paging out to disk
 	if err := r.ParseMultipartForm(1000000); err != nil {
 		fmt.Fprintf(w, "Unable to parse form: %v", err)
 		return
 	}
 
-	// fmt.Fprintf(w, "Post from website! %s", r.Form["jsonnet"])
 	ret, err := execJsonnetCode(r.FormValue("jsonnet"))
 	if err != nil {
 		fmt.Fprintf(w, "Unable to exec code with jsonnet VM: %v", err)
