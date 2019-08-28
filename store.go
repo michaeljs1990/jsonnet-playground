@@ -54,8 +54,29 @@ func NewJSQL(conn *sql.DB) JSQL {
 		Conn: conn,
 	}
 
-	m.GetStmt, _ = conn.Prepare("FROM jsonnet SELECT code WHERE id = ? LIMIT 1")
-	m.StoreStmt, _ = conn.Prepare("INSERT INTO jsonnet (id, code) VALUES (?, ?)")
+  stmt, err := conn.Prepare("SELECT (code) FROM jsonnet WHERE id = ? LIMIT 1")
+  if err != nil {
+    panic(err)
+  }
+  m.GetStmt = stmt
+	stmt, err = conn.Prepare("INSERT INTO jsonnet (id, code) VALUES (?, ?) ON DUPLICATE KEY UPDATE id=?, code=?")
+  if err != nil {
+    panic(err)
+  }
+  m.StoreStmt = stmt
+
+	// Setup table if needed
+	_, err = conn.Query(`
+    CREATE TABLE IF NOT EXISTS jsonnet (
+      id varchar(40),
+      code text,
+      PRIMARY KEY (id)
+    )
+  `)
+
+	if err != nil {
+		panic(err)
+	}
 
 	return m
 }
@@ -70,8 +91,8 @@ func (m JSQL) Get(id string) (string, error) {
 }
 
 func (m JSQL) Store(id string, code string) error {
-	row := m.StoreStmt.QueryRow(id, code)
-	if err := row.Scan(); err != nil {
+	_, err := m.StoreStmt.Exec(id, code, id, code)
+	if err != nil {
 		return err
 	}
 	return nil

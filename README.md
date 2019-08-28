@@ -29,3 +29,13 @@ docker run -p 8080:8080 michaeljs1990/jsonnet-playground:latest
 ```
 
 Only the latest tag is currently supported.
+
+### Quick MySQL Testing
+
+For quick mysql seting you can spin up a docker container with the
+following command.
+
+```
+$ docker run --net=host --name jsonnet --rm -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=jsonnet -d mysql:5.7
+$ JSONNET_MYSQL_CONN="root:secret@tcp(127.0.0.1:3306)/jsonnet" ./compile -sql
+```

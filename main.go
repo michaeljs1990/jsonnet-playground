@@ -22,7 +22,9 @@ func main() {
 	}
 
 	memFlag := flag.Bool("in-memory", false, "start up the daemon with an in-memory db (test only)")
-	sqlFlag := flag.Bool("sql", false, "start up the daemon with a sql db")
+	sqlFlag := flag.Bool("sql", false, "start up the daemon with a sql db (JSONNET_MYSQL_CONN) env for conn string")
+
+	flag.Parse()
 
 	// Add in toggle for the different types of backends
 	if *memFlag {
@@ -32,7 +34,7 @@ func main() {
 	}
 
 	if *sqlFlag {
-    // EXAMPLE: "user:password@/dbname"
+		// EXAMPLE: "user:password@/dbname"
 		db, err := sql.Open("mysql", os.Getenv("JSONNET_MYSQL_CONN"))
 		if err != nil {
 			panic(err)
