@@ -1,10 +1,14 @@
 package main
 
 import (
+	"database/sql"
+	"flag"
 	"log"
 	"net/http"
 	"os"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var (
@@ -17,9 +21,23 @@ func main() {
 		port = "8080"
 	}
 
+	memFlag := flag.Bool("in-memory", false, "start up the daemon with an in-memory db (test only)")
+	sqlFlag := flag.Bool("sql", false, "start up the daemon with a sql db")
+
 	// Add in toggle for the different types of backends
-	store = InMemory{
-		store: map[string]string{},
+	if *memFlag {
+		store = InMemory{
+			store: map[string]string{},
+		}
+	}
+
+	if *sqlFlag {
+    // EXAMPLE: "user:password@/dbname"
+		db, err := sql.Open("mysql", os.Getenv("JSONNET_MYSQL_CONN"))
+		if err != nil {
+			panic(err)
+		}
+		store = NewJSQL(db)
 	}
 
 	server := &http.Server{
