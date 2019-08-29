@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -34,12 +35,17 @@ func main() {
 	}
 
 	if *sqlFlag {
-		// EXAMPLE: "user:password@/dbname"
+		// EXAMPLE: "user:password@tcp(localhost:3306)/dbname"
 		db, err := sql.Open("mysql", os.Getenv("JSONNET_MYSQL_CONN"))
 		if err != nil {
 			panic(err)
 		}
 		store = NewJSQL(db)
+	}
+
+	if store == nil {
+		fmt.Println("A storage driver must be provided")
+		os.Exit(1)
 	}
 
 	server := &http.Server{

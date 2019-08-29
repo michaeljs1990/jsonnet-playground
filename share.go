@@ -31,6 +31,7 @@ func HandleShare(w http.ResponseWriter, r *http.Request) {
 	id := stringToHash(code)
 	if err := store.Store(id, code); err != nil {
 		fmt.Fprintf(w, "Unable to store code: %v", err)
+		return
 	}
 
 	fid := fmt.Sprintf("%s/j/%s", r.Host, id)

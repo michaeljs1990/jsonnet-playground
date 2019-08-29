@@ -19,4 +19,4 @@ WORKDIR /app
 COPY --from=builder /src/jplay .
 COPY static static
 
-ENTRYPOINT /app/jplay
+ENTRYPOINT ["/app/jplay"]

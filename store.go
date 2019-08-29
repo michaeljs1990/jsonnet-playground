@@ -54,29 +54,29 @@ func NewJSQL(conn *sql.DB) JSQL {
 		Conn: conn,
 	}
 
-	stmt, err := conn.Prepare("SELECT (code) FROM jsonnet WHERE id = ? LIMIT 1")
-	if err != nil {
-		panic(err)
-	}
-	m.GetStmt = stmt
-	stmt, err = conn.Prepare("INSERT INTO jsonnet (id, code) VALUES (?, ?) ON DUPLICATE KEY UPDATE id=?, code=?")
-	if err != nil {
-		panic(err)
-	}
-	m.StoreStmt = stmt
-
 	// Setup table if needed
-	_, err = conn.Query(`
+	_, err := conn.Exec(`
     CREATE TABLE IF NOT EXISTS jsonnet (
       id varchar(40),
       code text,
       PRIMARY KEY (id)
     )
   `)
-
 	if err != nil {
 		panic(err)
 	}
+
+	stmt, err := conn.Prepare("SELECT (code) FROM jsonnet WHERE id = ? LIMIT 1")
+	if err != nil {
+		panic(err)
+	}
+	m.GetStmt = stmt
+
+	stmt, err = conn.Prepare("INSERT INTO jsonnet (id, code) VALUES (?, ?) ON DUPLICATE KEY UPDATE id=?, code=?")
+	if err != nil {
+		panic(err)
+	}
+	m.StoreStmt = stmt
 
 	return m
 }
