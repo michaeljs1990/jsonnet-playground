@@ -2,10 +2,9 @@ Jsonnet Playground
 ==================
 
 This is largely inspired by the work done on golang playground 
-and takes advantage of the go-jsonnet program to give you the
-similar features. This very much has the minimum amount of code
-to get things working but lacks persistent stoage currently for
-code snippets.
+and takes advantage of the go-jsonnet program to give you
+similar features. In memory and persistance via mysql are
+supported.
 
 ### Hosted Site
 
