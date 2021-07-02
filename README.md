@@ -34,5 +34,13 @@ following command.
 
 ```
 $ docker run --net=host --name jsonnet --rm -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=jsonnet -d mysql:5.7
-$ JSONNET_MYSQL_CONN="root:secret@tcp(127.0.0.1:3306)/jsonnet" ./compile -sql
+$ JSONNET_MYSQL_CONN="root:secret@tcp(127.0.0.1:3306)/jsonnet" ./jsonnet-playground -sql
+```
+
+### Local Testing
+
+Build and run
+
+```
+./jsonnet-playground -in-memory
 ```
