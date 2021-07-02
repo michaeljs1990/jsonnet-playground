@@ -6,26 +6,14 @@ and takes advantage of the go-jsonnet program to give you
 similar features. In memory and persistance via mysql are
 supported.
 
-### Hosted Site
-
-Unable to host the site right now but hope to have a hosted version back soon.
-
 ### Dockerfile
 
-A dockerfile is included that can be built as you would any other
-docker file.
-
 ```
-docker build -t jsonnet-playground -- .
+docker run -p 8080:8080 michaeljs1990/jsonnet-playground:1.0.0
 ```
 
-Additionally a prebuilt image can be pulled down to run like this
+See all available tags at https://hub.docker.com/repository/docker/michaeljs1990/jsonnet-playground
 
-```
-docker run -p 8080:8080 michaeljs1990/jsonnet-playground:latest
-```
-
-Only the latest tag is currently supported.
 
 ### Quick MySQL Testing
 
