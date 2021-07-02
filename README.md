@@ -8,7 +8,7 @@ supported.
 
 ### Hosted Site
 
-For now you can test things out at https://jsonnet.xrt0x.com.
+Unable to host the site right now but hope to have a hosted version back soon.
 
 ### Dockerfile
 
